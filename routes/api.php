@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\TipoTefController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -59,4 +60,18 @@ Route::middleware('api')->prefix('v1')->group(function () {
 
         Route::delete('/{id}', [TipoTefController::class, 'delete']);
     }); //prefix = tefTypes
+
+
+    Route::prefix('providers')->group(function () {
+
+        Route::get('/', [FornecedorController::class, 'index']);
+
+        Route::get('/{id}', [FornecedorController::class, 'get']);
+
+        Route::post('/', [FornecedorController::class, 'create']);
+
+        Route::put('/{id}', [FornecedorController::class, 'update']);
+
+        Route::delete('/{id}', [FornecedorController::class, 'delete']);
+    }); //prefix = providers
 }); // middleware = api; prefix = v1
