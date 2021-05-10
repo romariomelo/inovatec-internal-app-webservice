@@ -20,25 +20,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-/*
-Route::group([
 
-    'middleware' => 'api',
-    'prefix' => 'auth'
+Route::middleware('api')->prefix('v1')->group(function () {
 
-], function ($router) {
-
-    Route::post('login', [AuthController::class, 'login']);
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('refresh', [AuthController::class, 'refresh']);
-    Route::post('me', [AuthController::class, 'me']);
-
-});
-*/
-
-Route::middleware('api')->prefix('v1')->group(function() {
-
-    Route::prefix('auth')->group(function() {
+    Route::prefix('auth')->group(function () {
 
         Route::post('login', [AuthController::class, 'login']);
 
@@ -47,10 +32,9 @@ Route::middleware('api')->prefix('v1')->group(function() {
         Route::post('refresh', [AuthController::class, 'refresh']);
 
         Route::post('me', [AuthController::class, 'me']);
-
     }); //prefix = auth
 
-    Route::prefix('clients')->group(function() {
+    Route::prefix('clients')->group(function () {
 
         Route::get('/', [ClientController::class, 'index']);
 
@@ -61,10 +45,9 @@ Route::middleware('api')->prefix('v1')->group(function() {
         Route::put('/{id}', [ClientController::class, 'update']);
 
         Route::delete('/{id}', [ClientController::class, 'delete']);
-
     }); //prefix = clients
 
-    Route::prefix('tefTypes')->group(function() {
+    Route::prefix('tefTypes')->group(function () {
 
         Route::get('/', [TipoTefController::class, 'index']);
 
@@ -72,6 +55,8 @@ Route::middleware('api')->prefix('v1')->group(function() {
 
         Route::post('/', [TipoTefController::class, 'create']);
 
-    });
+        Route::put('/{id}', [TipoTefController::class, 'update']);
 
+        Route::delete('/{id}', [TipoTefController::class, 'delete']);
+    }); //prefix = tefTypes
 }); // middleware = api; prefix = v1
