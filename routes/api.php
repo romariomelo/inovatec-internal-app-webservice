@@ -64,6 +64,10 @@ Route::middleware('api')->prefix('v1')->group(function () {
 
     Route::prefix('providers')->group(function () {
 
+        Route::get('tef', [FornecedorController::class, 'tef']);
+
+        Route::get('software', [FornecedorController::class, 'software']);
+
         Route::get('/', [FornecedorController::class, 'index']);
 
         Route::get('/{id}', [FornecedorController::class, 'get']);

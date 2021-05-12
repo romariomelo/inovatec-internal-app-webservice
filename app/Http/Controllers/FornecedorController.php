@@ -112,6 +112,20 @@ class FornecedorController extends Controller
         return response()->json(['message' => 'Deleted']);
     }
 
+    public function tef()
+    {
+        $fornecedores  = Fornecedor::where('fornece_tef', true);
+
+        return response()->json($fornecedores->get());
+    }
+
+    public function software()
+    {
+        $fornecedores  = Fornecedor::where('fornece_software', true);
+
+        return response()->json($fornecedores->get());
+    }
+
     private function FornecedorDataValidador(Fornecedor $fornecedor)
     {
         if (strlen($fornecedor->razao) == 0) {

@@ -12,4 +12,6 @@ class Fornecedor extends Model
     use SoftDeletes;
 
     protected $table = 'fornecedores';
+
+    protected $hidden = ['deleted_at'];
 }
