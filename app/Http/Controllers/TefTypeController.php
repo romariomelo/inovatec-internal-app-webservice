@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\InvalidDataException;
-use App\Models\TipoTef;
+use App\Models\TefType;
 use Illuminate\Http\Request;
 
-class TipoTefController extends Controller
+class TefTypeController extends Controller
 {
     public function index()
     {
-        return response()->json(TipoTef::all());
+        return response()->json(TefType::all());
     }
 
     public function get($id)
     {
-        $tipo_tef = TipoTef::find($id);
+        $tipo_tef = TefType::find($id);
 
         if (!$tipo_tef) {
             return response()->json(['message' => 'Type TEF not found'], 404);
@@ -27,10 +27,10 @@ class TipoTefController extends Controller
     public function create(Request $request)
     {
         $data = json_decode($request->getContent());
-        $type_tef = new TipoTEF();
-        $type_tef->descricao = $data->descricao;
-        $type_tef->save();
-        return response()->json($type_tef);
+        $tef_type = new TefType();
+        $tef_type->description = $data->description;
+        $tef_type->save();
+        return response()->json($tef_type);
     }
 
     public function update($id, Request $request)
@@ -40,18 +40,18 @@ class TipoTefController extends Controller
 
             $data = json_decode($request->getContent());
 
-            $tipo_tef = TipoTef::find($id);
+            $tef_type = TefType::find($id);
 
-            if (!$tipo_tef) {
+            if (!$tef_type) {
                 return response()->json(['message' => 'Not Found'], 404);
             }
 
-            $tipo_tef->descricao = trim($data->descricao);
+            $tef_type->description = trim($data->description);
 
-            $this->tefTypeDataValidator($tipo_tef);
+            $this->tefTypeDataValidator($tef_type);
 
-            if ($tipo_tef->save()) {
-                return response()->json($tipo_tef);
+            if ($tef_type->save()) {
+                return response()->json($tef_type);
             }
         } catch (InvalidDataException $ex) {
             return response()->json(['message' => 'Invalid Data', 'error' => $ex->getMessage()], 400);
@@ -60,7 +60,7 @@ class TipoTefController extends Controller
 
     public function delete($id)
     {
-        $tipo_tef = TipoTef::find($id);
+        $tipo_tef = TefType::find($id);
 
         if (!$tipo_tef) {
             return response()->json(['message' => 'Not Found'], 404);
@@ -71,9 +71,9 @@ class TipoTefController extends Controller
         }
     }
 
-    private function tefTypeDataValidator(TipoTEF $tipo_tef)
+    private function tefTypeDataValidator(TefType $tipo_tef)
     {
-        if (strlen($tipo_tef->descricao) == 0) {
+        if (strlen($tipo_tef->description) == 0) {
             throw new InvalidDataException('Very short description');
         }
     }

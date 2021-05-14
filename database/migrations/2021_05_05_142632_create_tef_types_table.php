@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTiposTefTable extends Migration
+class CreateTefTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateTiposTefTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipos_tef', function (Blueprint $table) {
+        Schema::create('tef_types', function (Blueprint $table) {
             $table->id();
-            $table->string('descricao', 100);
+            $table->string('description', 30);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateTiposTefTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipos_tef');
+        Schema::dropIfExists('tef_types');
     }
 }

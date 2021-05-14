@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TipoTef extends Model
+class TefType extends Model
 {
     use HasFactory;
 
-    protected $table = 'tipos_tef';
+    protected $hidden = ['deleted_at'];
 }

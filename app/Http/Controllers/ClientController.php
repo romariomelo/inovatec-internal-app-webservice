@@ -14,6 +14,14 @@ class ClientController extends Controller
             $clients->where('id', $request->id);
         }
 
+        if ($request->trading_name) {
+            $clients->where('trading_name', 'like', $request->trading_name . '%');
+        }
+
+        if ($request->company_name) {
+            $clients->where('company_name', 'like', $request->company_name . '%');
+        }
+
         return response()->json($clients->get());
     }
 
@@ -30,10 +38,13 @@ class ClientController extends Controller
     public function create(Request $request) {
         $data = json_decode($request->getContent());
         $client = new Client();
-        $client->razao = $data->razao;
-        $client->fantasia = $data->fantasia;
-        $client->cnpj = $data->cnpj;
-        $client->ie = $data->ie;
+        $client->trading_name = $data->trading_name;
+        $client->company_name = $data->company_name;
+        $client->ein = $data->ein;
+        $client->state_registration = $data->state_registration;
+        $client->email = $data->email;
+        $client->phone_number = $data->phone_number;
+        $client->notes = $data->notes;
         $client->save();
         return response()->json($client, 201);
     }
@@ -46,10 +57,13 @@ class ClientController extends Controller
         if (!$client) {
             return response()->json(['message' => 'Client not found'], 404);
         }
-        $client->razao = $data->razao;
-        $client->fantasia = $data->fantasia;
-        $client->cnpj = $data->cnpj;
-        $client->ie = $data->ie;
+        $client->trading_name = $data->trading_name;
+        $client->company_name = $data->company_name;
+        $client->ein = $data->ein;
+        $client->state_registration = $data->state_registration;
+        $client->phone_number = $data->phone_number;
+        $client->email = $data->email;
+        $client->notes = $data->notes;
         $client->save();
         return response()->json($client, 202);
     }

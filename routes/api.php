@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\FornecedorController;
-use App\Http\Controllers\TipoTefController;
+use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\TefTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -50,32 +50,32 @@ Route::middleware('api')->prefix('v1')->group(function () {
 
     Route::prefix('tefTypes')->group(function () {
 
-        Route::get('/', [TipoTefController::class, 'index']);
+        Route::get('/', [TefTypeController::class, 'index']);
 
-        Route::get('/{id}', [TipoTefController::class, 'get']);
+        Route::get('/{id}', [TefTypeController::class, 'get']);
 
-        Route::post('/', [TipoTefController::class, 'create']);
+        Route::post('/', [TefTypeController::class, 'create']);
 
-        Route::put('/{id}', [TipoTefController::class, 'update']);
+        Route::put('/{id}', [TefTypeController::class, 'update']);
 
-        Route::delete('/{id}', [TipoTefController::class, 'delete']);
+        Route::delete('/{id}', [TefTypeController::class, 'delete']);
     }); //prefix = tefTypes
 
 
     Route::prefix('providers')->group(function () {
 
-        Route::get('tef', [FornecedorController::class, 'tef']);
+        Route::get('tef', [ProviderController::class, 'tef']);
 
-        Route::get('software', [FornecedorController::class, 'software']);
+        Route::get('software', [ProviderController::class, 'software']);
 
-        Route::get('/', [FornecedorController::class, 'index']);
+        Route::get('/', [ProviderController::class, 'index']);
 
-        Route::get('/{id}', [FornecedorController::class, 'get']);
+        Route::get('/{id}', [ProviderController::class, 'get']);
 
-        Route::post('/', [FornecedorController::class, 'create']);
+        Route::post('/', [ProviderController::class, 'create']);
 
-        Route::put('/{id}', [FornecedorController::class, 'update']);
+        Route::put('/{id}', [ProviderController::class, 'update']);
 
-        Route::delete('/{id}', [FornecedorController::class, 'delete']);
+        Route::delete('/{id}', [ProviderController::class, 'delete']);
     }); //prefix = providers
 }); // middleware = api; prefix = v1
