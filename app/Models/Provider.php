@@ -12,4 +12,9 @@ class Provider extends Model
     use SoftDeletes;
 
     protected $hidden = ['deleted_at'];
+
+    protected $casts = [
+        'provides_tef' => 'boolean',
+        'provides_software' => 'boolean',
+    ];
 }

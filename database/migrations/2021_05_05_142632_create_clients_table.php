@@ -17,11 +17,12 @@ class CreateClientsTable extends Migration
             $table->id();
             $table->string('trading_name', 200);
             $table->string('company_name', 200);
-            $table->string('ein', 14);
+            $table->string('ein', 18);
             $table->string('state_registration', 20)->nullable();
-            $table->string('phone_number', 11)->nullable();
+            $table->string('phone_number', 15)->nullable();
             $table->string('email', 200)->nullable();
             $table->text('notes')->nullable();
+            $table->unsignedInteger('order')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

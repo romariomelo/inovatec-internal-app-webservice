@@ -17,8 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    dd(User::all());
-    return view('welcome');
+    try {
+        // TESTA CONEXÃO COM O BANCO DE DADOS
+        DB::connection()->getPdo();
+        return response()->json(['message' => 'Conexão realizada com sucesso.']);
+    } catch (Exception $ex) {
+        return response()->json(['message' => $ex->getMessage()]);
+    }
 });
 
 Route::get('/clear', function() {
@@ -37,8 +42,12 @@ Route::get('/reset-database', function() {
         echo "Excluindo $table_name<br />";
         DB::statement("DROP TABLE if EXISTS $table_name");
     }
-});
 
-Route::get('/teste', function () {
-    return 'teste';
+    echo Artisan::call('migrate');
+
+    $u = new User();
+    $u->email = 'romario@inovatecstore.com.br';
+    $u->name = 'Romario';
+    $u->password = bcrypt('123');
+    $u->save();
 });

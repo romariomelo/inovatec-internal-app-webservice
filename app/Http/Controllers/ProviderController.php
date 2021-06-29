@@ -49,6 +49,7 @@ class ProviderController extends Controller
     public function create(Request $request)
     {
         try {
+            $user = auth()->user();
             $data = json_decode($request->getContent());
 
             $provider = new Provider();
@@ -61,6 +62,7 @@ class ProviderController extends Controller
             $provider->notes = $data->notes;
             $provider->provides_tef = $data->provides_tef;
             $provider->provides_software = $data->provides_software;
+            $provider->created_by = $user->id;
 
             $this->providerDataValidador($provider);
 

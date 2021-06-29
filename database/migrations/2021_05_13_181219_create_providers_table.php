@@ -24,8 +24,9 @@ class CreateProvidersTable extends Migration
             $table->boolean('provides_tef')->default(false);
             $table->boolean('provides_software')->default(false);
             $table->text('notes')->nullable();
-            $table->softDeletes();
+            $table->unsignedInteger('created_by');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
